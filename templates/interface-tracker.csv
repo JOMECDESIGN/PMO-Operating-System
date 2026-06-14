@@ -1,0 +1,15 @@
+ID,Part,Spec to confirm,Affects,Priority,Supply type,Status,Client contact,Our owner,Due date,Confirm date,Spec file,Approval no.,Notes
+IF01,P-HUD,Resolution / interface type / SDK / transmittance,Software UI · windshield procurement,Highest,Client-ES,Not provided,,,,,,,Critical-path front-end; clear first
+IF02,Magic screen,Control-logic doc / dimensions / touch protocol,Software UI · dashboard styling,Highest,Client-ES,Not provided,,,,,,,Blocks dashboard styling
+IF03,Health-monitoring sensor set,Data interface (CAN FD/USB/ETH) / format / algorithm bundled?,Health-data visualization,Highest,Client-ES,Not provided,,,,,,,Real-vs-simulated boundary
+IF04,Starry-sky headliner controller,Fiber controller interface / protocol / mounting,Headliner structure · firmware,High,Client-ES,Not provided,,,,,,,Fiber routing in B-surface phase
+IF05,IMSE film,Interface protocol / backlight pattern / frame,Door-panel structure · HW adaptation,High,Client-ES,Not provided,,,,,,,4 sets; pattern TBD by client
+IF06,Ceiling screen,Dimensions / mounting drawing / interface type,Ceiling-screen rotation mechanism,High,Client-ES,Not provided,,,,,,,Mechanism needs exact dims
+IF07,Health armrest (Console),CAN FD protocol doc / data format,CAN FD network · software,High,Client-ES,Not provided,,,,,,,
+IF08,Health armrest (door),CAN FD protocol doc / data format,CAN FD network · software,High,Client-ES,Not provided,,,,,,,
+IF09,Heating films,Area / power / controller bundled?,Power management · HW selection,Mid,Client-ES,Not provided,,,,,,,NTC over-temp protection
+IF10,Silicone leather,Color / texture / seam plan with leather,Door-panel wrap · CMF,Mid,Client-mass,Not provided,,,,,,,Color delta-E <= 2.0
+IF11,PCR plastic parts,Client part list / molding status,Structure adaptation,Mid,Client-mass,Not provided,,,,,,,Client molds; we adapt structure
+IF12,Real-wood/aluminum/carbon trim,Spec / mounting / delivery status,Trim mounting,Mid,Client-mass,Not provided,,,,,,,
+IF13,Brushed-metal trim,Spec / mounting,Function-part frame,Mid,Client-mass,Not provided,,,,,,,
+IF14,Self-illuminating stitching,Interface protocol / independent control,Door inner panel · ambient,Mid,Client-ES,Not provided,,,,,,,Independent control accent

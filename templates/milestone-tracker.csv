@@ -1,0 +1,8 @@
+ID,Milestone,Week,Month ref,Gate (pass criteria),Key prerequisite,Owner team,Status,Health,Blocker/Notes
+M1,Concept review,W5,2026.07-early,>=1 styling direction client-confirmed in writing,Trend study; N->3 sketches,Styling,Not reached,Green,Downstream depends on it; <=2 review rounds
+M2,Styling locked,W8,2026.07-late,3->1 direction deepened & confirmed,M1 passed; CMF draft,Styling,Not reached,Green,M1 delay cascades to M2
+M3,Data freeze,W11,2026.08-mid,CAS/A-surface complete - no major change,M2 passed; CAS modeling,Styling/Demo-model,Not reached,Green,Post-freeze changes via change-control; data phase compressed
+M4,Frame complete,W14,2026.09-early,Body frame done - assembly can start,M3 freeze; frame design,Demo-model,Not reached,Green,Critical-path core; frame slip cascades to assembly/integration
+M5,UI/software main body,W20,2026.10-late,Screen UI/UX main body done; interaction ready,Contract freeze; client-screen adaptation,Software/Interaction,Not reached,Green,Cross-site: Hangzhou depends on Kunshan adaptation + Figma
+M6,Pre-acceptance,W26,2026.11-late,A-class 100% · B-class >=90% · stability 8h x3 zero A-faults,Final assembly; integration,Test,Not reached,Green,Real-hardware integration window (W22-26); zero A-class to pass to final
+M7,Final acceptance,W30,2026.12-late,Final acceptance passed; daily self-check ready; shippable,Pre-acceptance rework done,Test,Not reached,Green,Target end-2026; show 2027.04
