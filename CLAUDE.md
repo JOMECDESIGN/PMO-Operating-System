@@ -98,6 +98,7 @@ When a task touches one of these areas, open the matching doc **before** acting.
 | How this whole system works / PMO role | `docs/framework.md` | First read; onboarding; team alignment |
 | Client-supplied interface clearance (S1) | `docs/interface-sop.md` | Tracking/chasing client interface specs (15-working-day rule) |
 | Hangzhou ↔ Kunshan collaboration (S2) | `docs/two-site.md` | Aligning the two sites; freezing the interface contract |
+| Two-site software-hardware dev flow (S2) | `docs/dev-flow.md` | The end-to-end Hangzhou↔Kunshan dev process — phases, parallel lines, three gates (W1/W2/W19) |
 | Schedule baseline & critical path (S3) | `docs/gantt.md` | Viewing/maintaining the 30-week plan |
 | Change control (F1 + F2) | `docs/change-control.md` | Anyone wants to change frozen styling/data or interface |
 | Risk tracking (17 risks) | `docs/risk-register.md` | Weekly risk review; logging new risks |

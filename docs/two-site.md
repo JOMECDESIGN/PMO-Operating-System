@@ -1,6 +1,7 @@
 # two-site.md — Seam S2: Hangzhou ↔ Kunshan
 
 > The highest-leverage seam. Two sites connected ONLY through the interface contract.
+> **End-to-end process flow (with the full diagram):** see `dev-flow.md` — phases, parallel lines, gates W1/W2/W19.
 
 ## Geography
 - **Hangzhou** — front-end (React/Lottie/ECharts) + back-end (state-machine/WebSocket/FastAPI) + **Mock service**.
