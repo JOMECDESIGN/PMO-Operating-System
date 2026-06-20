@@ -1,21 +1,21 @@
-ID,Phase,Line,Task,Gate,Week,Depends on,Deliverable,Owner site,Status,Notes
-DF01,1-Define,Single-line,项目启动 (Project kickoff),,W0,,Kickoff record,Both,Not started,需求收敛单线推进，契约成型前不并行
-DF02,1-Define,Single-line,客户沟通与需求初步确认 (Client comms / prelim requirement),,W0,DF01,Requirement memo,Hangzhou+Client,Not started,S1 supply seam input
-DF03,1-Define,Single-line,立项评审 (Project approval review),,W1,DF02,Approval record,Both,Not started,
-DF04,1-Define,Single-line,需求分析 / 方案设计制定 (Requirement analysis / solution design),,W1,DF03,Solution design,Hangzhou,Not started,
-DF05,1-Define,Single-line,产品经理编写《需求规格说明书》 (PM writes Requirements Spec),,W1-W2,DF04,Requirements Spec doc,Hangzhou,Not started,W2 契约冻结的输入物
-DF06,Gate,Milestone,W2 · 契约冻结 (Contract freeze),G2,W2,DF05,"WebSocket fmt + scene-trigger API + IO table + CAN FD protocol, frozen",Both,Not started,命门 F2；三方书面确认+双地通知；变更走 change-control 双签
-DF07,2-Parallel,Front-end (Hangzhou),UI设计师输出《原型图+视觉稿》 (UI prototype + visual),,W2-W6,DF06,Prototype + visual spec,Hangzhou,Not started,React · Lottie · ECharts
-DF08,2-Parallel,Front-end (Hangzhou),前端开发：场景编排 · 状态机 (Front-end dev: scene orchestration / state machine),,W3-W18,DF07,Front-end build,Hangzhou,Not started,提前 4-6 周开工
-DF09,2-Parallel,Front-end (Hangzhou),Mock 服务联调 (替代真实硬件) (Mock service integration),G1,W1-W18,DF06,Mock service,Hangzhou,Not started,G1 W1 Mock 启动；不等硬件
-DF10,2-Parallel,Front-end (Hangzhou),原型确认：客户签字 · 锁定范围 (Prototype sign-off / scope lock),,W6-W8,DF07,Client-signed prototype,Hangzhou+Client,Not started,S1 范围闸门；防 C->A scope creep (<10%)
-DF11,2-Parallel,Hardware (Kunshan),硬件抽象网关层 CAN FD ↔ MQTT (HW abstraction gateway),,W2-W18,DF06,Gateway firmware,Kunshan,Not started,把硬件抽象成 MQTT，前端无需感知 CAN FD
-DF12,2-Parallel,Hardware (Kunshan),硬件执行层：9类机构 · 4屏 (HW execution layer),,W2-W18,DF06,9 mechanisms + 4 screens,Kunshan,Not started,
-DF13,2-Parallel,Hardware (Kunshan),IO点表 · 协议表 (IO table / protocol table),,W2-W18,DF06,IO table + protocol table,Kunshan,Not started,每次更新必须同步回灌杭州 Mock（否则 W19 炸）
-DF14,2-Parallel,Hardware (Kunshan),嵌入式维护 · 必交付 (Embedded maintenance / must-deliver),,W2-W18,DF11,Embedded build,Kunshan,Not started,
-DF15,Gate,Milestone,W19 · 真机联调 (Real-hardware integration),G3,W19,"DF10,DF14",Real data into MQTT,Both,Not started,代码零改动=成功；否则回退 W2 双地书面确认
-DF16,3-Closeout,Single-line,验收是否通过? (Acceptance pass?),,W19-W26,DF15,Acceptance result,Test,Not started,闭环判定
-DF17,3-Closeout,Single-line,缺陷修复与二次验证 (Defect fix / re-verification),,W19-W26,DF16,Fix + re-test record,Both,Not started,验收不通过则修复后重新验收（回到 DF16）
-DF18,3-Closeout,Single-line,交付与上线：部署包 / Docker 镜像 (Delivery / go-live),,W26-W30,DF16,Deployment pkg / Docker image,Hangzhou,Not started,-> 客户服务器 / 座舱环境
-DF19,3-Closeout,Single-line,运维与优化：反馈收集 · 问题跟踪 (Ops / optimization),,W30+,DF18,Feedback + issue log,Both,Not started,
+ID,Phase,Line,Task,Gate,Anchor (relative),Project week (fill in),Depends on,Deliverable,Owner site,Status,Notes
+DF01,1-Define,Single-line,项目启动 (Project kickoff),,T0,,,Kickoff record,Both,Not started,需求收敛单线推进，契约成型前不并行
+DF02,1-Define,Single-line,客户沟通与需求初步确认 (Client comms / prelim requirement),,T0..G2,,DF01,Requirement memo,Hangzhou+Client,Not started,S1 supply seam input
+DF03,1-Define,Single-line,立项评审 (Project approval review),,T0..G2,,DF02,Approval record,Both,Not started,
+DF04,1-Define,Single-line,需求分析 / 方案设计制定 (Requirement analysis / solution design),,T0..G2,,DF03,Solution design,Hangzhou,Not started,
+DF05,1-Define,Single-line,产品经理编写《需求规格说明书》 (PM writes Requirements Spec),,before G2,,DF04,Requirements Spec doc,Hangzhou,Not started,契约冻结的输入物
+DF06,Gate,Milestone,契约冻结 (Contract freeze),G2,G2,,DF05,"WebSocket fmt + scene-trigger API + IO table + CAN FD protocol, frozen",Both,Not started,命门 F2；进入条件=规格书三方书面确认+双地通知；变更走 change-control 双签
+DF07,2-Parallel,Front-end (Hangzhou),UI设计师输出《原型图+视觉稿》 (UI prototype + visual),,after G2,,DF06,Prototype + visual spec,Hangzhou,Not started,React · Lottie · ECharts
+DF08,2-Parallel,Front-end (Hangzhou),前端开发：场景编排 · 状态机 (Front-end dev: scene orchestration / state machine),,G2..G3,,DF07,Front-end build,Hangzhou,Not started,较真机相对提前约 4-6 周开工
+DF09,2-Parallel,Front-end (Hangzhou),Mock 服务联调 (替代真实硬件) (Mock service integration),G1,G1..G3,,DF06,Mock service,Hangzhou,Not started,G1 进入条件=契约草案就绪；不等硬件
+DF10,2-Parallel,Front-end (Hangzhou),原型确认：客户签字 · 锁定范围 (Prototype sign-off / scope lock),,after G2,,DF07,Client-signed prototype,Hangzhou+Client,Not started,S1 范围闸门；防 C->A scope creep (<10%)
+DF11,2-Parallel,Hardware (Kunshan),硬件抽象网关层 CAN FD ↔ MQTT (HW abstraction gateway),,G2..G3,,DF06,Gateway firmware,Kunshan,Not started,把硬件抽象成 MQTT，前端无需感知 CAN FD
+DF12,2-Parallel,Hardware (Kunshan),硬件执行层：9类机构 · 4屏 (HW execution layer),,G2..G3,,DF06,9 mechanisms + 4 screens,Kunshan,Not started,
+DF13,2-Parallel,Hardware (Kunshan),IO点表 · 协议表 (IO table / protocol table),,G2..G3,,DF06,IO table + protocol table,Kunshan,Not started,每次更新必须同步回灌杭州 Mock（否则 G3 真机一接入就炸）
+DF14,2-Parallel,Hardware (Kunshan),嵌入式维护 · 必交付 (Embedded maintenance / must-deliver),,G2..G3,,DF11,Embedded build,Kunshan,Not started,
+DF15,Gate,Milestone,真机联调 (Real-hardware integration),G3,G3,,"DF10,DF14",Real data into MQTT,Both,Not started,进入条件=网关+IO点表就绪、Mock对齐；代码零改动=成功，否则回退 G2
+DF16,3-Closeout,Single-line,验收是否通过? (Acceptance pass?),,after G3,,DF15,Acceptance result,Test,Not started,闭环判定
+DF17,3-Closeout,Single-line,缺陷修复与二次验证 (Defect fix / re-verification),,after G3,,DF16,Fix + re-test record,Both,Not started,验收不通过则修复后重新验收（回到 DF16）
+DF18,3-Closeout,Single-line,交付与上线：部署包 / Docker 镜像 (Delivery / go-live),,delivery,,DF16,Deployment pkg / Docker image,Hangzhou,Not started,-> 客户服务器 / 座舱环境
+DF19,3-Closeout,Single-line,运维与优化：反馈收集 · 问题跟踪 (Ops / optimization),,post go-live,,DF18,Feedback + issue log,Both,Not started,
 </content>
