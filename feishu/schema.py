@@ -161,6 +161,9 @@ MS_ID, MS_NAME, MS_WEEK, MS_HEALTH, MS_BLOCK = "编号", "里程碑", "周次", 
 # 变更表
 CG_ID, CG_TITLE, CG_FREEZE, CG_STATUS = "编号", "标题", "冻结线", "状态"
 CG_HZ, CG_KS, CG_VER, CG_SYNCED = "杭州签字", "昆山签字", "契约版本", "已同步"
+# 工作项表
+WI_ID, WI_NAME, WI_TEAM, WI_STATUS = "编号", "工作项", "负责团队", "状态"
+WI_CP, WI_PLAN_END, WI_R, WI_PROGRESS, WI_NOTE = "关键路径", "计划完成", "R负责", "进度%", "备注"
 
 # 选项值常量
 IF_ST_FROZEN, IF_ST_OVERDUE = "已确认冻结", "逾期"

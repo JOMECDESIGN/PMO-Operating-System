@@ -8,8 +8,9 @@
   python pmo_feishu.py risk        跑风险预警
   python pmo_feishu.py milestone   跑里程碑健康
   python pmo_feishu.py change      跑变更广播(F1/F2)
+  python pmo_feishu.py workitem    跑工作项健康(阻塞+逾期未完成)
   python pmo_feishu.py report      汇总三表 → RAG 周报骨架（整体=最差分量）
-  python pmo_feishu.py all         一次跑完 4 个自动化
+  python pmo_feishu.py all         一次跑完 5 个自动化
 """
 
 import _bootstrap  # noqa: F401
@@ -54,12 +55,15 @@ def main():
         import auto_3_milestone_health as a; a.run()
     elif cmd == "change":
         import auto_4_change_control as a; a.run()
+    elif cmd == "workitem":
+        import auto_5_workitem_health as a; a.run()
     elif cmd == "all":
         client = fc.get_client()
         import auto_1_interface_overdue, auto_2_risk_review
-        import auto_3_milestone_health, auto_4_change_control
+        import auto_3_milestone_health, auto_4_change_control, auto_5_workitem_health
         for mod in (auto_1_interface_overdue, auto_2_risk_review,
-                    auto_3_milestone_health, auto_4_change_control):
+                    auto_3_milestone_health, auto_4_change_control,
+                    auto_5_workitem_health):
             mod.run(client)
     elif cmd == "report":
         _report()
