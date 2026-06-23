@@ -1,8 +1,8 @@
-ID,Milestone,Week,Month ref,Gate (pass criteria),Key prerequisite,Owner team,Status,Health,Blocker/Notes
-M1,Concept review,W5,2026.07-early,>=1 styling direction client-confirmed in writing,Trend study; N->3 sketches,Styling,Not reached,Green,Downstream depends on it; <=2 review rounds
-M2,Styling locked,W8,2026.07-late,3->1 direction deepened & confirmed,M1 passed; CMF draft,Styling,Not reached,Green,M1 delay cascades to M2
-M3,Data freeze,W11,2026.08-mid,CAS/A-surface complete - no major change,M2 passed; CAS modeling,Styling/Demo-model,Not reached,Green,Post-freeze changes via change-control; data phase compressed
-M4,Frame complete,W14,2026.09-early,Body frame done - assembly can start,M3 freeze; frame design,Demo-model,Not reached,Green,Critical-path core; frame slip cascades to assembly/integration
-M5,UI/software main body,W20,2026.10-late,Screen UI/UX main body done; interaction ready,Contract freeze; client-screen adaptation,Software/Interaction,Not reached,Green,Cross-site: Hangzhou depends on Kunshan adaptation + Figma
-M6,Pre-acceptance,W26,2026.11-late,A-class 100% · B-class >=90% · stability 8h x3 zero A-faults,Final assembly; integration,Test,Not reached,Green,Real-hardware integration window (W22-26); zero A-class to pass to final
-M7,Final acceptance,W30,2026.12-late,Final acceptance passed; daily self-check ready; shippable,Pre-acceptance rework done,Test,Not reached,Green,Target end-2026; show 2027.04
+编号,里程碑,周次,月份,通过标准,关键前置,负责团队,状态,健康度,阻塞备注
+M1,概念评审,W5,2026.07 初,≥1 个造型方向客户书面确认,趋势研究；N→3 草案,造型,未到达,绿,下游依赖它；≤2 轮评审
+M2,造型锁定,W8,2026.07 末,3→1 方向深化并确认,M1 通过；CMF 草案,造型,未到达,绿,M1 延迟级联到 M2
+M3,数据冻结,W11,2026.08 中,CAS/A 面完成-无重大变更,M2 通过；CAS 建模,造型/样车,未到达,绿,冻结后变更走变更控制；数据期被压缩
+M4,骨架完成,W14,2026.09 初,车身骨架完成-可开始装配,M3 冻结；骨架设计,样车,未到达,绿,关键路径核心；骨架滑动级联到装配/集成
+M5,UI/软件主体,W20,2026.10 末,屏幕 UI/UX 主体完成；交互就绪,契约冻结；客户屏适配,软件/交互,未到达,绿,跨站点：杭州依赖昆山适配 + Figma
+M6,预验收,W26,2026.11 末,A 类 100% · B 类 ≥90% · 稳定性 8h×3 零 A 类故障,总装；集成,测试,未到达,绿,真实硬件集成窗口(W22-26)；零 A 类方可进终验
+M7,终验收,W30,2026.12 末,终验收通过；日常自检就绪；可发运,预验收返工完成,测试,未到达,绿,目标 2026 底；2027.04 展出

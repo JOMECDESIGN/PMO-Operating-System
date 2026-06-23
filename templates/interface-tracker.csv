@@ -1,15 +1,15 @@
-ID,Part,Spec to confirm,Affects,Priority,Supply type,Status,Client contact,Our owner,Due date,Confirm date,Spec file,Approval no.,Notes
-IF01,P-HUD,Resolution / interface type / SDK / transmittance,Software UI · windshield procurement,Highest,Client-ES,Not provided,,,,,,,Critical-path front-end; clear first
-IF02,Magic screen,Control-logic doc / dimensions / touch protocol,Software UI · dashboard styling,Highest,Client-ES,Not provided,,,,,,,Blocks dashboard styling
-IF03,Health-monitoring sensor set,Data interface (CAN FD/USB/ETH) / format / algorithm bundled?,Health-data visualization,Highest,Client-ES,Not provided,,,,,,,Real-vs-simulated boundary
-IF04,Starry-sky headliner controller,Fiber controller interface / protocol / mounting,Headliner structure · firmware,High,Client-ES,Not provided,,,,,,,Fiber routing in B-surface phase
-IF05,IMSE film,Interface protocol / backlight pattern / frame,Door-panel structure · HW adaptation,High,Client-ES,Not provided,,,,,,,4 sets; pattern TBD by client
-IF06,Ceiling screen,Dimensions / mounting drawing / interface type,Ceiling-screen rotation mechanism,High,Client-ES,Not provided,,,,,,,Mechanism needs exact dims
-IF07,Health armrest (Console),CAN FD protocol doc / data format,CAN FD network · software,High,Client-ES,Not provided,,,,,,,
-IF08,Health armrest (door),CAN FD protocol doc / data format,CAN FD network · software,High,Client-ES,Not provided,,,,,,,
-IF09,Heating films,Area / power / controller bundled?,Power management · HW selection,Mid,Client-ES,Not provided,,,,,,,NTC over-temp protection
-IF10,Silicone leather,Color / texture / seam plan with leather,Door-panel wrap · CMF,Mid,Client-mass,Not provided,,,,,,,Color delta-E <= 2.0
-IF11,PCR plastic parts,Client part list / molding status,Structure adaptation,Mid,Client-mass,Not provided,,,,,,,Client molds; we adapt structure
-IF12,Real-wood/aluminum/carbon trim,Spec / mounting / delivery status,Trim mounting,Mid,Client-mass,Not provided,,,,,,,
-IF13,Brushed-metal trim,Spec / mounting,Function-part frame,Mid,Client-mass,Not provided,,,,,,,
-IF14,Self-illuminating stitching,Interface protocol / independent control,Door inner panel · ambient,Mid,Client-ES,Not provided,,,,,,,Independent control accent
+编号,部件,待确认规格,影响阻塞,优先级,供货类型,状态,客户对接人,我方负责人,截止日,确认日,规格文件,审批编号,备注
+IF01,P-HUD,分辨率 / 接口类型 / SDK / 透过率,软件 UI · 风挡采购,最高,甲供-样件,未提供,,Tim,2026-06-16,,,,关键路径前端；最先澄清
+IF02,Magic screen 魔术屏,控制逻辑文档 / 尺寸 / 触控协议,软件 UI · 仪表台造型,最高,甲供-样件,未提供,,朱姝儿,2026-06-16,,,,阻塞仪表台造型
+IF03,健康监测传感器组,数据接口(CAN FD/USB/ETH) / 格式 / 是否自带算法,健康数据可视化,最高,甲供-样件,未提供,,Tim,2026-06-16,,,,真实 vs 模拟 边界
+IF04,星空顶棚控制器,光纤控制器接口 / 协议 / 安装,顶棚结构 · 固件,高,甲供-样件,未提供,,,2026-06-30,,,,光纤走线在 B 面阶段
+IF05,IMSE 模内电子膜片,接口协议 / 背光图案 / 边框,门板结构 · 硬件适配,高,甲供-样件,未提供,,,2026-06-30,,,,4 套；图案待客户定
+IF06,顶置屏,尺寸 / 安装图 / 接口类型,顶置屏旋转机构,高,甲供-样件,未提供,,,2026-06-30,,,,机构需精确尺寸
+IF07,健康扶手(中控),CAN FD 协议文档 / 数据格式,CAN FD 网络 · 软件,高,甲供-样件,未提供,,,2026-06-30,,,,
+IF08,健康扶手(车门),CAN FD 协议文档 / 数据格式,CAN FD 网络 · 软件,高,甲供-样件,未提供,,,2026-06-30,,,,
+IF09,加热膜,面积 / 功率 / 是否自带控制器,电源管理 · 硬件选型,中,甲供-样件,未提供,,,2026-07-15,,,,NTC 过温保护
+IF10,硅胶皮革,颜色 / 纹理 / 与皮革的拼缝方案,门板包覆 · CMF,中,甲供-量产,未提供,,,2026-07-15,,,,色差 delta-E ≤ 2.0
+IF11,PCR 塑料件,客户件清单 / 模具状态,结构适配,中,甲供-量产,未提供,,,2026-07-15,,,,客户开模；我方适配结构
+IF12,真木/铝/碳纤维饰件,规格 / 安装 / 交付状态,饰件安装,中,甲供-量产,未提供,,,2026-07-15,,,,
+IF13,拉丝金属饰件,规格 / 安装,功能件框架,中,甲供-量产,未提供,,,2026-07-15,,,,
+IF14,自发光缝线,接口协议 / 独立控制,车门内板 · 氛围,中,甲供-样件,未提供,,,2026-07-15,,,,独立控制点缀

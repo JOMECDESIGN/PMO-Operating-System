@@ -1,0 +1,31 @@
+name: PMO Feishu Daily Digest
+
+# 每工作日 09:00（Asia/Shanghai = 01:00 UTC）把 PMO 四项摘要推到飞书报警群。
+# 也可在 Actions 页手动触发（workflow_dispatch）。
+on:
+  schedule:
+    - cron: "0 1 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install -r feishu/requirements.txt
+
+      - name: Run PMO automations
+        working-directory: feishu
+        env:
+          # 在仓库 Settings → Secrets and variables → Actions 配置以下 secrets：
+          LARK_APP_ID: ${{ secrets.LARK_APP_ID }}
+          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+          # FEISHU_IDS = config/ids.json 的整段 JSON（含 app_token / tables / alert_chat_id）
+          FEISHU_IDS: ${{ secrets.FEISHU_IDS }}
+        run: python pmo_feishu.py all

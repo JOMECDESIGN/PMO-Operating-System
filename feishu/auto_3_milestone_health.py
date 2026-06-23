@@ -1,6 +1,6 @@
 """自动化③ 里程碑健康度（每日摘要）。
 
-整体健康 = 最差分量（任一 Red → 整体 Red；否则任一 Amber → Amber）。
+整体健康 = 最差分量（任一红 → 整体红；否则任一黄 → 黄）。
 这正是 weekly-report.md 的「Overall = the worst component」收口规则。
 """
 
@@ -9,9 +9,6 @@ import _bootstrap  # noqa: F401
 import feishu_client as fc
 import schema
 from config import settings
-
-_RANK = {"Red": 2, "Amber": 1, "Green": 0}
-_EMOJI = {"Red": "🔴", "Amber": "🟡", "Green": "🟢"}
 
 
 def run(client=None) -> str:
@@ -25,19 +22,19 @@ def run(client=None) -> str:
         fc.deliver(client, text, "milestone-health")
         return text
 
-    worst = max((fc.as_text(f.get("Health")) or "Green" for f in rows),
-                key=lambda h: _RANK.get(h, 0))
-    overall = _EMOJI.get(worst, "🟢")
+    worst = max((fc.as_text(f.get(schema.MS_HEALTH)) or "绿" for f in rows),
+                key=lambda h: schema.MS_HEALTH_RANK.get(h, 0))
+    overall = schema.MS_HEALTH_EMOJI.get(worst, "🟢")
 
-    reds = [f for f in rows if fc.as_text(f.get("Health")) == "Red"]
-    ambers = [f for f in rows if fc.as_text(f.get("Health")) == "Amber"]
+    reds = [f for f in rows if fc.as_text(f.get(schema.MS_HEALTH)) == "红"]
+    ambers = [f for f in rows if fc.as_text(f.get(schema.MS_HEALTH)) == "黄"]
 
     lines = [f"{overall} 里程碑整体健康 = {worst}（= 最差分量）"]
-    for tag, bucket in (("🔴 Red", reds), ("🟡 Amber", ambers)):
+    for tag, bucket in (("🔴 红", reds), ("🟡 黄", ambers)):
         for f in bucket:
             lines.append(
-                f"{tag} [{fc.as_text(f.get('ID'))}|{fc.as_text(f.get('Week'))}] "
-                f"{fc.as_text(f.get('Milestone'))} — {fc.as_text(f.get('Blocker/Notes'))}"
+                f"{tag} [{fc.as_text(f.get(schema.MS_ID))}|{fc.as_text(f.get(schema.MS_WEEK))}] "
+                f"{fc.as_text(f.get(schema.MS_NAME))} — {fc.as_text(f.get(schema.MS_BLOCK))}"
             )
     if not reds and not ambers:
         lines.append("全部 🟢，按计划推进。")

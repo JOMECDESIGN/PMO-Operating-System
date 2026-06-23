@@ -101,12 +101,14 @@ GitHub Actions / 飞书自动化定时触发亦可。
 - wiki 节点 token：`FfnOwJ7tdihBcnkbngRc16BWnxu`（space_id `7650873549455903718`）
 - app_token：`Scm1bqYpcaqYc9sNNoJcBCTInCc`
 
+> 4 张表已全中文化（字段名+选项+内容，英文缩写保留）。table_id 为中文化重建后的值。
+
 | 表 | table_id | 直达链接 |
 |---|---|---|
-| S1 接口澄清追踪 | `tblssOPiAST1Cb0w` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblssOPiAST1Cb0w |
-| 风险登记册 | `tblxe6IF4lC9hmYj` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblxe6IF4lC9hmYj |
-| 里程碑 M1–M7 | `tbl7diQhdZ3vMEmW` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tbl7diQhdZ3vMEmW |
-| 变更台账 F1/F2 | `tblsIUfWVuqklmpJ` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblsIUfWVuqklmpJ |
+| S1 接口澄清追踪 | `tblftsVf6IR8epcQ` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblftsVf6IR8epcQ |
+| 风险登记册 | `tblKliQSTM6nrseb` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblKliQSTM6nrseb |
+| 里程碑 M1–M7 | `tblMQhBTTGfAZPkc` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblMQhBTTGfAZPkc |
+| 变更台账 F1/F2 | `tblG00HMrnGsUAnP` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblG00HMrnGsUAnP |
 
 **报警群**：`PMO 报警群 · Huaxiang NICE Demo`，chat_id `oc_97a82bc868583a15793b8c3b61c6fe01`（成员：Tim 严艇、朱姝儿；机器人为群管理员，自动化默认发往此群）。
 

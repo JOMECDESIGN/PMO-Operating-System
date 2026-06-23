@@ -1,7 +1,7 @@
 """自动化① S1 甲供件接口逾期催办（每日摘要，非每条触发）。
 
-逾期判定：未 Confirmed-frozen 且（已过 Due date 或 Status=Overdue）。
-按责任人 @ 汇总成一条摘要发到告警群 —— 对齐 CLAUDE.md §7「daily-digest, not per-record」配额戒律。
+逾期判定：未「已确认冻结」且（已过截止日 或 状态=逾期）。
+按责任人 @ 汇总成一条摘要发到告警群 —— 对齐 CLAUDE.md §7「daily-digest, not per-record」。
 对应 R02 / interface-sop.md 的 L1 催办。
 """
 
@@ -16,12 +16,12 @@ from config import settings
 
 
 def _overdue(fields: dict, now_ms: int) -> bool:
-    status = fc.as_text(fields.get("Status"))
-    if status == "Confirmed-frozen":
+    status = fc.as_text(fields.get(schema.IF_STATUS))
+    if status == schema.IF_ST_FROZEN:
         return False
-    if status == "Overdue":
+    if status == schema.IF_ST_OVERDUE:
         return True
-    due = fields.get("Due date")
+    due = fields.get(schema.IF_DUE)
     return isinstance(due, (int, float)) and due < now_ms
 
 
@@ -37,20 +37,18 @@ def run(client=None) -> str:
         fc.deliver(client, text, "interface-overdue")
         return text
 
-    # 最高优先级排前
-    rank = {"Highest": 0, "High": 1, "Mid": 2}
-    overdue.sort(key=lambda f: rank.get(fc.as_text(f.get("Priority")), 9))
+    overdue.sort(key=lambda f: schema.IF_PRIORITY_RANK.get(fc.as_text(f.get(schema.IF_PRIORITY)), 9))
 
     lines = [f"🔴 S1 接口逾期催办（{len(overdue)} 项）—— 直接威胁 M2/M3 数据路径"]
     for f in overdue:
-        owner = fc.as_text(f.get("Our owner"))
-        at = notify.at_name(owner) if owner else "@(未指派 owner)"
+        owner = fc.as_text(f.get(schema.IF_OWNER))
+        at = notify.at_name(owner) if owner else "@(未指派责任人)"
         lines.append(
-            f"· [{fc.as_text(f.get('ID'))}|{fc.as_text(f.get('Priority'))}] "
-            f"{fc.as_text(f.get('Part'))} — {fc.as_text(f.get('Spec to confirm'))} "
-            f"｜阻塞: {fc.as_text(f.get('Affects'))} ｜{at}"
+            f"· [{fc.as_text(f.get(schema.IF_ID))}|{fc.as_text(f.get(schema.IF_PRIORITY))}] "
+            f"{fc.as_text(f.get(schema.IF_PART))} — {fc.as_text(f.get(schema.IF_SPEC))} "
+            f"｜阻塞: {fc.as_text(f.get(schema.IF_AFFECTS))} ｜{at}"
         )
-    lines.append("处置：L1 催 owner；逾期超窗 → L2 正式知会客户+经理（见 interface-sop.md）。")
+    lines.append("处置：L1 催责任人；逾期超窗 → L2 正式知会客户+经理（见 interface-sop.md）。")
     text = "\n".join(lines)
     fc.deliver(client, text, "interface-overdue")
     return text

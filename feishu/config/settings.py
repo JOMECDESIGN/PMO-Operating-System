@@ -40,7 +40,10 @@ PM_OPEN_ID = _env("FEISHU_PM_OPEN_ID", "LARK_PM_OPEN_ID")
 
 # owner 显示名 -> open_id，用于逾期催办时 @ 责任人。
 # 例：{"张三": "ou_xxx", "李四": "ou_yyy"}
-MEMBERS: dict[str, str] = {}
+MEMBERS: dict[str, str] = {
+    "Tim": "ou_3c711133e0d5298d8d47258455a2fc16",
+    "朱姝儿": "ou_f74a7bcf6972d3bb45a4b5942e8d3a7a",
+}
 
 # --- PMO 报警群 -----------------------------------------------------------
 # create_alert_group.py 据此建群、按邮箱解析成员为 open_id 拉入。
@@ -56,10 +59,15 @@ _IDS_PATH = pathlib.Path(__file__).with_name("ids.json")
 
 
 def load_ids() -> dict:
+    # CI/无文件场景：优先从环境变量 FEISHU_IDS 读整段 JSON（GitHub Actions secret）。
+    env_ids = os.environ.get("FEISHU_IDS")
+    if env_ids:
+        return json.loads(env_ids)
     if _IDS_PATH.exists():
         return json.loads(_IDS_PATH.read_text(encoding="utf-8"))
     raise SystemExit(
-        "[feishu] config/ids.json 不存在 —— 先运行 `python build_workspace.py` 搭建工作台。"
+        "[feishu] 找不到表 ID —— 先运行 `python build_workspace.py` 生成 config/ids.json，"
+        "或在环境变量 FEISHU_IDS 里提供整段 JSON。"
     )
 
 
