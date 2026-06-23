@@ -42,6 +42,15 @@ PM_OPEN_ID = _env("FEISHU_PM_OPEN_ID", "LARK_PM_OPEN_ID")
 # 例：{"张三": "ou_xxx", "李四": "ou_yyy"}
 MEMBERS: dict[str, str] = {}
 
+# --- PMO 报警群 -----------------------------------------------------------
+# create_alert_group.py 据此建群、按邮箱解析成员为 open_id 拉入。
+# 注意：成员必须与本应用在同一飞书租户，否则解析不到、无法拉入。
+PMO_GROUP_NAME = "PMO 报警群 · Huaxiang NICE Demo"
+PMO_MEMBER_EMAILS = [
+    "Tim@jomecdesign.com",       # Tim（项目负责人）
+    "zhushuer@jomecdesign.com",  # zhushuer
+]
+
 # --- ids.json（由 build_workspace.py 生成，存 app_token + 各表 table_id）----
 _IDS_PATH = pathlib.Path(__file__).with_name("ids.json")
 
@@ -52,6 +61,16 @@ def load_ids() -> dict:
     raise SystemExit(
         "[feishu] config/ids.json 不存在 —— 先运行 `python build_workspace.py` 搭建工作台。"
     )
+
+
+def alert_chat() -> str:
+    """告警群 chat_id：优先环境变量，其次 ids.json 里 create_alert_group 写入的值。"""
+    if ALERT_CHAT_ID:
+        return ALERT_CHAT_ID
+    try:
+        return load_ids().get("alert_chat_id", "")
+    except SystemExit:
+        return ""
 
 
 def save_ids(data: dict) -> None:

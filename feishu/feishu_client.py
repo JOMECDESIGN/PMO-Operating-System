@@ -5,6 +5,7 @@
 """
 
 import json
+import time
 import uuid
 
 import lark_oapi as lark
@@ -25,7 +26,13 @@ from lark_oapi.api.bitable.v1 import (
     SearchAppTableRecordRequest,
     SearchAppTableRecordRequestBody,
 )
+from lark_oapi.api.contact.v3 import (
+    BatchGetIdUserRequest,
+    BatchGetIdUserRequestBody,
+)
 from lark_oapi.api.im.v1 import (
+    CreateChatRequest,
+    CreateChatRequestBody,
     CreateMessageRequest,
     CreateMessageRequestBody,
 )
@@ -37,7 +44,8 @@ from config import settings
 def get_client() -> lark.Client:
     if not settings.APP_ID or not settings.APP_SECRET:
         raise SystemExit(
-            "[feishu] 缺少凭证：请先 export FEISHU_APP_ID / FEISHU_APP_SECRET。"
+            "[feishu] 缺少凭证：请先 export FEISHU_APP_ID / FEISHU_APP_SECRET"
+            "（或官方命名 LARK_APP_ID / LARK_APP_SECRET）。"
         )
     return (
         lark.Client.builder()
@@ -48,12 +56,24 @@ def get_client() -> lark.Client:
     )
 
 
-def _check(resp, what: str):
-    if not resp.success():
-        raise SystemExit(
-            f"[feishu] {what} 失败: code={resp.code} msg={resp.msg} "
-            f"log_id={resp.get_log_id()}"
-        )
+def invoke(fn, req, what: str, tries: int = 5):
+    """统一调用：捕获 token 端点偶发抖动（空响应抛 JSONDecodeError）做指数退避重试；
+    业务/权限错误（resp 非 success）立即抛出，不掩盖。"""
+    last = None
+    for i in range(tries):
+        try:
+            resp = fn(req)
+        except Exception as e:  # token 抓取空响应等瞬时异常
+            last = str(e).splitlines()[-1]
+            time.sleep(1.0 * (i + 1))
+            continue
+        if not resp.success():
+            raise SystemExit(
+                f"[feishu] {what} 失败: code={resp.code} msg={resp.msg} "
+                f"log_id={resp.get_log_id()}"
+            )
+        return resp
+    raise SystemExit(f"[feishu] {what} 连续异常 {tries} 次（疑似 token 端点抖动）: {last}")
 
 
 # --- Bitable：建应用 / 建表 -------------------------------------------------
@@ -62,8 +82,7 @@ def create_app(client, name: str, folder_token: str = "") -> str:
     if folder_token:
         body = body.folder_token(folder_token)
     req = CreateAppRequest.builder().request_body(body.build()).build()
-    resp = client.bitable.v1.app.create(req)
-    _check(resp, "app.create")
+    resp = invoke(client.bitable.v1.app.create, req, "app.create")
     return resp.data.app.app_token
 
 
@@ -94,8 +113,7 @@ def create_table(client, app_token: str, table_def: dict) -> str:
         )
         .build()
     )
-    resp = client.bitable.v1.app_table.create(req)
-    _check(resp, f"app_table.create({table_def['key']})")
+    resp = invoke(client.bitable.v1.app_table.create, req, f"app_table.create({table_def['key']})")
     return resp.data.table_id
 
 
@@ -113,8 +131,7 @@ def batch_insert(client, app_token: str, table_id: str, rows: list[dict]) -> Non
             )
             .build()
         )
-        resp = client.bitable.v1.app_table_record.batch_create(req)
-        _check(resp, "record.batch_create")
+        invoke(client.bitable.v1.app_table_record.batch_create, req, "record.batch_create")
 
 
 def batch_update(client, app_token: str, table_id: str, updates: list[dict]) -> None:
@@ -134,8 +151,7 @@ def batch_update(client, app_token: str, table_id: str, updates: list[dict]) -> 
             )
             .build()
         )
-        resp = client.bitable.v1.app_table_record.batch_update(req)
-        _check(resp, "record.batch_update")
+        invoke(client.bitable.v1.app_table_record.batch_update, req, "record.batch_update")
 
 
 def search_all(client, app_token: str, table_id: str) -> list[dict]:
@@ -152,8 +168,7 @@ def search_all(client, app_token: str, table_id: str) -> list[dict]:
         )
         if page_token:
             b = b.page_token(page_token)
-        resp = client.bitable.v1.app_table_record.search(b.build())
-        _check(resp, "record.search")
+        resp = invoke(client.bitable.v1.app_table_record.search, b.build(), "record.search")
         data = resp.data
         for it in (data.items or []):
             items.append({"record_id": it.record_id, "fields": it.fields or {}})
@@ -162,6 +177,51 @@ def search_all(client, app_token: str, table_id: str) -> list[dict]:
         else:
             break
     return items
+
+
+# --- 通讯录 / 群 -----------------------------------------------------------
+def resolve_users(client, emails) -> tuple[dict, list]:
+    """邮箱 -> open_id。返回 (found{email:open_id}, missing[email...])。
+    missing 非空 = 这些人不在本应用所属租户（跨租户无法拉群）。"""
+    req = (
+        BatchGetIdUserRequest.builder()
+        .user_id_type("open_id")
+        .request_body(
+            BatchGetIdUserRequestBody.builder()
+            .emails(list(emails))
+            .include_resigned(False)
+            .build()
+        )
+        .build()
+    )
+    resp = invoke(client.contact.v3.user.batch_get_id, req, "contact.batch_get_id")
+    found, missing = {}, []
+    for u in (resp.data.user_list or []):
+        uid = getattr(u, "user_id", None)
+        (found.__setitem__(u.email, uid) if uid else missing.append(u.email))
+    return found, missing
+
+
+def create_group(client, name: str, open_ids: list, description: str = "") -> str:
+    body = (
+        CreateChatRequestBody.builder()
+        .name(name)
+        .chat_mode("group")
+        .chat_type("private")
+    )
+    if description:
+        body = body.description(description)
+    if open_ids:
+        body = body.user_id_list(list(open_ids))
+    req = (
+        CreateChatRequest.builder()
+        .user_id_type("open_id")
+        .set_bot_manager(True)  # 机器人设为群管理员，便于后续发消息/管理
+        .request_body(body.build())
+        .build()
+    )
+    resp = invoke(client.im.v1.chat.create, req, "chat.create")
+    return resp.data.chat_id
 
 
 # --- 字段值归一化（Bitable 文本字段可能返回分段数组）-----------------------
@@ -202,14 +262,14 @@ def send_text(client, receive_id: str, text: str, receive_id_type: str = "chat_i
         )
         .build()
     )
-    resp = client.im.v1.message.create(req)
-    _check(resp, "message.create")
+    invoke(client.im.v1.message.create, req, "message.create")
 
 
 def deliver(client, text: str, title: str = "alert") -> None:
-    """统一投递：配了 ALERT_CHAT_ID 就发群，否则 dry-run 打印到终端。"""
-    if settings.ALERT_CHAT_ID:
-        send_text(client, settings.ALERT_CHAT_ID, text, "chat_id")
-        print(f"[feishu] 已发送「{title}」→ chat {settings.ALERT_CHAT_ID}")
+    """统一投递：有告警群(环境变量或 ids.json)就发群，否则 dry-run 打印到终端。"""
+    chat = settings.alert_chat()
+    if chat:
+        send_text(client, chat, text, "chat_id")
+        print(f"[feishu] 已发送「{title}」→ chat {chat}")
     else:
-        print(f"[feishu] (dry-run) 未设 ALERT_CHAT_ID，「{title}」内容如下：\n{text}\n")
+        print(f"[feishu] (dry-run) 无告警群，「{title}」内容如下：\n{text}\n")
