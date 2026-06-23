@@ -81,6 +81,38 @@ MILESTONE = {
     ],
 }
 
+WORKITEM = {
+    "key": "workitem",
+    "name": "工作项 Work Items",
+    "seed": "work-items.csv",
+    "fields": [
+        ("编号", TEXT),
+        ("工作项", TEXT),
+        ("完成定义", TEXT),
+        ("负责团队", SELECT,
+         ["造型", "硬件", "软件(杭州)", "嵌入式(昆山)", "样车", "测试", "动画交互", "PMO"]),
+        ("站点", SELECT, ["杭州", "昆山", "跨站点", "客户"]),
+        ("关联里程碑", SELECT, ["M1", "M2", "M3", "M4", "M5", "M6", "M7"]),
+        ("关联接缝", SELECT, ["S1", "S2", "S3", "—"]),
+        ("功能等级", SELECT, ["A", "B", "C", "—"]),
+        ("优先级", SELECT, ["最高", "高", "中", "低"]),
+        ("状态", SELECT, ["待办", "进行中", "阻塞", "评审中", "已完成", "已取消"]),
+        ("关键路径", CHECKBOX),
+        ("依赖前置", TEXT),
+        ("R负责", TEXT),
+        ("A批准", TEXT),
+        ("C咨询", TEXT),
+        ("I知会", TEXT),
+        ("计划开始", DATETIME),
+        ("计划完成", DATETIME),
+        ("实际完成", DATETIME),
+        ("进度%", NUMBER),
+        ("预估工时(人天)", NUMBER),
+        ("关联风险", TEXT),
+        ("备注", TEXT),
+    ],
+}
+
 # 变更台账（F1/F2）—— 无 CSV 种子，建空表。配合飞书审批回填，auto_4 据此校验广播。
 CHANGE = {
     "key": "change",
@@ -104,7 +136,12 @@ CHANGE = {
     ],
 }
 
-TABLES = [INTERFACE, RISK, MILESTONE, CHANGE]
+TABLES = [INTERFACE, RISK, MILESTONE, WORKITEM, CHANGE]
+
+# 字段类型查表（seed_data 据此把 CSV 文本转成日期/数字/复选框）
+FIELD_TYPES = {
+    t["key"]: {name: ftype for (name, ftype, *_rest) in t["fields"]} for t in TABLES
+}
 
 DATE_FIELDS = {
     name for t in TABLES for (name, *rest) in t["fields"] if rest and rest[0] == DATETIME

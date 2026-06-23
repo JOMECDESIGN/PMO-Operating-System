@@ -108,6 +108,7 @@ GitHub Actions / 飞书自动化定时触发亦可。
 | S1 接口澄清追踪 | `tblftsVf6IR8epcQ` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblftsVf6IR8epcQ |
 | 风险登记册 | `tblKliQSTM6nrseb` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblKliQSTM6nrseb |
 | 里程碑 M1–M7 | `tblMQhBTTGfAZPkc` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblMQhBTTGfAZPkc |
+| 工作项 Work Items | `tblG0dX6TGnVelxk` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblG0dX6TGnVelxk |
 | 变更台账 F1/F2 | `tblG00HMrnGsUAnP` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblG00HMrnGsUAnP |
 
 **报警群**：`PMO 报警群 · Huaxiang NICE Demo`，chat_id `oc_97a82bc868583a15793b8c3b61c6fe01`（成员：Tim 严艇、朱姝儿；机器人为群管理员，自动化默认发往此群）。

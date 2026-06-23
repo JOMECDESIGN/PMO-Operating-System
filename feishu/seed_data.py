@@ -31,6 +31,9 @@ def _to_ms(text: str):
     return None  # 非日期文本（如 "W5"/"2026.07-early"）由对应文本字段承载，这里不处理
 
 
+_TRUE = {"是", "true", "True", "1", "✓", "Y", "y"}
+
+
 def _row_to_fields(row: dict, table_def: dict) -> dict:
     fields = {}
     for field in table_def["fields"]:
@@ -42,6 +45,14 @@ def _row_to_fields(row: dict, table_def: dict) -> dict:
             ms = _to_ms(raw)
             if ms is not None:
                 fields[name] = ms
+        elif ftype == schema.NUMBER:
+            try:
+                fields[name] = float(raw) if "." in raw else int(raw)
+            except ValueError:
+                pass
+        elif ftype == schema.CHECKBOX:
+            if raw in _TRUE:
+                fields[name] = True
         else:
             fields[name] = raw
     return fields
