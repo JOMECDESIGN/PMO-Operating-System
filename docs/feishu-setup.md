@@ -89,3 +89,27 @@ GitHub Actions / 飞书自动化定时触发亦可。
 - 「昆山要改一个 CAN FD 字段」→ 技能会提醒走 F2 双签流程
 
 技能背后调 `feishu/pmo_feishu.py`。需要临时、零散地查飞书数据时，也可叠加官方 **larksuite/cli**（`lark` 命令，专为 AI Agent 设计，覆盖 Base/IM/Docs）。
+
+## 9. 线上实例（已部署，团队可直接用）
+
+> 租户 `wu35s592xy.feishu.cn`。应用 App ID `cli_aabcb51ac5b8dbea`。
+> 这些是位置/标识，非密钥（App Secret 只走环境变量，不入库）。
+
+**多维表格（已挂到知识库节点「4张表测试」下，知识库成员可访问）**
+
+- 工作台入口：https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu
+- wiki 节点 token：`FfnOwJ7tdihBcnkbngRc16BWnxu`（space_id `7650873549455903718`）
+- app_token：`Scm1bqYpcaqYc9sNNoJcBCTInCc`
+
+| 表 | table_id | 直达链接 |
+|---|---|---|
+| S1 接口澄清追踪 | `tblssOPiAST1Cb0w` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblssOPiAST1Cb0w |
+| 风险登记册 | `tblxe6IF4lC9hmYj` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblxe6IF4lC9hmYj |
+| 里程碑 M1–M7 | `tbl7diQhdZ3vMEmW` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tbl7diQhdZ3vMEmW |
+| 变更台账 F1/F2 | `tblsIUfWVuqklmpJ` | https://wu35s592xy.feishu.cn/wiki/FfnOwJ7tdihBcnkbngRc16BWnxu?table=tblsIUfWVuqklmpJ |
+
+**报警群**：`PMO 报警群 · Huaxiang NICE Demo`，chat_id `oc_97a82bc868583a15793b8c3b61c6fe01`（成员：Tim 严艇、朱姝儿；机器人为群管理员，自动化默认发往此群）。
+
+> 这些 ID 由 `feishu/config/ids.json` 维护（本地生成、已 gitignore）；本节是给团队找入口用的快照。
+> 排错备忘：同租户却「邮箱解析不到」=> 检查**应用可用范围/通讯录可见范围**是否覆盖该成员；
+> 「WebSocket connection error」=> 来自事件订阅长连接模式，本集成是轮询式、**不需要**长连接。
