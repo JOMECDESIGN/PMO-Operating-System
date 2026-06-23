@@ -102,14 +102,16 @@ When a task touches one of these areas, open the matching doc **before** acting.
 | Change control (F1 + F2) | `docs/change-control.md` | Anyone wants to change frozen styling/data or interface |
 | Risk tracking (17 risks) | `docs/risk-register.md` | Weekly risk review; logging new risks |
 | Milestones + RAG weekly report | `docs/weekly-report.md` | Milestone health; writing the weekly report |
+| Feishu integration (build + automations) | `docs/feishu-setup.md` | Standing up the Bitable trackers & PMO automations in Feishu |
 
 > Data lives in **Feishu Bitable** (live trackers). These docs are the **rules and structure**. CSV/XLSX in `templates/` are **import seeds** — once imported to Bitable, maintain the Bitable copy, not the seed.
+> **Runnable integration** lives in `feishu/` (official `lark-oapi` SDK): one-click builds the trackers + change ledger, seeds them, and runs the four PMO automations. Drive it in plain language via the `feishu-pmo` skill. See `docs/feishu-setup.md`.
 
 ---
 
 ## 7. Feishu Landing (no Feishu Project)
 
-All of the above runs on free Feishu components. Don't propose buying Feishu Project.
+All of the above runs on free Feishu components. Don't propose buying Feishu Project. The **runnable code** for this section lives in `feishu/` (official `lark-oapi` SDK) — see `docs/feishu-setup.md`.
 
 - **Bitable (多维表格)** — single source of truth for every tracker; one dataset, many views (grid / kanban / **gantt** / form / dashboard).
 - **Approval (审批)** — written confirmations and change records; supports **conditional branches** (route by change type) and **parallel branches** (both sites sign at once). Syncs back into Bitable.

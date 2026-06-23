@@ -1,0 +1,9 @@
+{
+  "app_token": "appbcXXXXXXXXXXXXXXXX",
+  "tables": {
+    "interface": "tblXXXXXXXXXXXXXX",
+    "risk": "tblXXXXXXXXXXXXXX",
+    "milestone": "tblXXXXXXXXXXXXXX",
+    "change": "tblXXXXXXXXXXXXXX"
+  }
+}

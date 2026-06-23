@@ -1,0 +1,2 @@
+# PMO 飞书集成 —— 官方 Python SDK（覆盖全部 OpenAPI：Bitable/IM/Approval/Wiki…）
+lark-oapi>=2.0.0

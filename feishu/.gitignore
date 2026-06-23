@@ -1,0 +1,8 @@
+# 生成物 / 本地态 —— 不入库
+config/ids.json
+__pycache__/
+*.pyc
+
+# 凭证只走环境变量；万一有人误建本地配置，挡掉
+config/local_settings.py
+.env

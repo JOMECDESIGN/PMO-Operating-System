@@ -39,11 +39,18 @@ The design philosophy follows the broader Claude Code community consensus: a **s
 │   ├── gantt.md               # Seam S3: 30-week schedule baseline + critical path
 │   ├── change-control.md      # Freeze lines F1 (CAS data) + F2 (interface contract)
 │   ├── risk-register.md       # 17-risk register + weekly review cadence
-│   └── weekly-report.md       # Milestones M1–M7 + RAG weekly report template
-└── templates/
-    ├── interface-tracker.csv  # Import seed → Feishu Bitable
-    ├── risk-register.csv       # Import seed → Feishu Bitable
-    └── milestone-tracker.csv   # Import seed → Feishu Bitable
+│   ├── weekly-report.md       # Milestones M1–M7 + RAG weekly report template
+│   └── feishu-setup.md        # Standing up the trackers + automations in Feishu
+├── templates/
+│   ├── interface-tracker.csv  # Import seed → Feishu Bitable
+│   ├── risk-register.csv       # Import seed → Feishu Bitable
+│   └── milestone-tracker.csv   # Import seed → Feishu Bitable
+├── feishu/                    # Runnable Feishu integration (official lark-oapi SDK)
+│   ├── build_workspace.py     # One-click: build the 3 trackers + change ledger
+│   ├── seed_data.py           # Seed the tables from templates/*.csv
+│   ├── auto_1..4_*.py         # The four PMO automations (daily-digest)
+│   └── pmo_feishu.py          # Unified CLI entrypoint (used by the skill)
+└── .claude/skills/feishu-pmo/ # Drive the integration in plain language
 ```
 
 ---
@@ -54,7 +61,7 @@ The design philosophy follows the broader Claude Code community consensus: a **s
 - **Three seams (S1/S2/S3)** — supply (client↔us), cross-site (Hangzhou↔Kunshan), inter-team (critical path). ~70% of delay risk lives here.
 - **Two freeze lines (F1/F2)** — CAS/A-surface data, and the interface contract. After freeze, nothing changes without change control. F2 changes need **both sites** to sign.
 - **RAG weekly report** — overall health = the *worst* component (milestones, critical-path buffer, risks). Honest amber/red beats cosmetic green.
-- **Feishu landing** — everything runs on Bitable + Approval + Automation + Wiki. **No Feishu Project license needed.**
+- **Feishu landing** — everything runs on Bitable + Approval + Automation + Wiki. **No Feishu Project license needed.** Runnable code in [`feishu/`](./feishu) (official `lark-oapi` SDK); drive it in plain language via the `feishu-pmo` skill.
 
 ---
 
