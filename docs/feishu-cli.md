@@ -56,7 +56,7 @@ Out of scope for now: Calendar, Mail, OKR, Attendance, Slides — no PMO leverag
 
 ## 4. Prerequisites — confirm with IT before first real write
 
-This is a **gated** rollout. Per §5.2 "never invent status," treat the following as **unconfirmed** until IT signs off:
+This is a **gated** rollout. Per §5.2 "never invent status," treat the following as **unconfirmed** until IT signs off — use the one-page sign-off sheet at `docs/feishu-cli-it-checklist.md`:
 
 1. **App + scopes** — a Feishu custom app with Open API permissions for **Base** (read/write records), **Approval** (create/query instances), **Wiki/Drive**, **Messenger**, **Tasks**. 企业版 does not grant these by default.
 2. **API rate/quota** — CLI calls hit Open API rate limits, **separate from** the Automation run quota in §7. Design for **daily-digest batch calls**, not per-record loops.
