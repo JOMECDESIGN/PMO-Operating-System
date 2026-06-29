@@ -1,7 +1,8 @@
 # meegle-cli — Borrowable Methods & a Supplement to the PMO Philosophy
 
-> **Status:** ready to publish as a child doc under the Feishu Wiki node
-> `https://wu35s592xy.feishu.cn/wiki/KX5TwFxEPipfE0kXymQcxEmPnNd`.
+> **Status:** ✅ Published (Chinese) as a child doc under the Feishu Wiki node
+> `00_PMO运营体系总览_知识库导览` → https://wu35s592xy.feishu.cn/wiki/DiW9wsKUDiAat9kcAbxcFIOqnWf
+> This English file is the repo-side source of record; the Chinese version is the published Wiki copy.
 > **Premise:** We do **not** use Meegle / 飞书项目 (no Feishu Project license — CLAUDE.md §7).
 > We are **not** borrowing the product. We are borrowing the **methods** its CLI embodies — and using them to *supplement this repo's operating philosophy*, not replace it.
 > Execution layer remains `larksuite/cli` (see `docs/feishu-cli.md`). `meegle-cli` is the **command-style blueprint**.
