@@ -102,8 +102,10 @@ When a task touches one of these areas, open the matching doc **before** acting.
 | Change control (F1 + F2) | `docs/change-control.md` | Anyone wants to change frozen styling/data or interface |
 | Risk tracking (17 risks) | `docs/risk-register.md` | Weekly risk review; logging new risks |
 | Milestones + RAG weekly report | `docs/weekly-report.md` | Milestone health; writing the weekly report |
+| Feishu execution layer (CLI) | `docs/feishu-cli.md` | Operating Bitable/Approval/Wiki/Messenger from Claude Code via `larksuite/cli` |
 
 > Data lives in **Feishu Bitable** (live trackers). These docs are the **rules and structure**. CSV/XLSX in `templates/` are **import seeds** — once imported to Bitable, maintain the Bitable copy, not the seed.
+> To *operate* those trackers from Claude Code, the execution layer is **`larksuite/cli`** (`docs/feishu-cli.md` + the `feishu-pmo` skill) — read-only / dry-run until IT confirms app scopes.
 
 ---
 
@@ -116,6 +118,7 @@ All of the above runs on free Feishu components. Don't propose buying Feishu Pro
 - **Automation (自动化)** — reminders and overdue chasing. **Quota caution:** the paid 商业专业版 has a limited monthly automation run quota — use **daily-digest triggers, not per-record triggers**. Confirm the exact quota with IT before scaling.
 - **Wiki (知识库)** — archive of every doc; the team's single shelf.
 - **Meetings + Minutes (妙记)** — weekly meeting + auto minutes → action items converted to tasks.
+- **CLI execution layer** — `larksuite/cli` (official, MIT) drives the components above from Claude Code; it needs only a standard 企业版 OAuth app, **not** Feishu Project/Meegle. CLI calls hit Open API rate limits — **separate from** the Automation quota above — so still batch as daily digests. See `docs/feishu-cli.md`. (The sibling `meegle-cli` targets Feishu Project, which we don't use; it serves only as our command-style blueprint.)
 
 ---
 
