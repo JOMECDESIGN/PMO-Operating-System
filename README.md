@@ -42,8 +42,9 @@ The design philosophy follows the broader Claude Code community consensus: a **s
 │   └── weekly-report.md       # Milestones M1–M7 + RAG weekly report template
 └── templates/
     ├── interface-tracker.csv  # Import seed → Feishu Bitable
-    ├── risk-register.csv       # Import seed → Feishu Bitable
-    └── milestone-tracker.csv   # Import seed → Feishu Bitable
+    ├── risk-register.csv      # Import seed → Feishu Bitable
+    ├── milestone-tracker.csv  # Import seed → Feishu Bitable
+    └── gantt-schedule.csv     # Import seed → Feishu Bitable (Gantt view)
 ```
 
 ---
@@ -102,7 +103,7 @@ This constitution is opinionated toward a **two-site, hardware+software, fixed-d
 
 ## License
 
-Suggest **MIT** or **CC BY 4.0** if you publish this — both let others reuse and adapt freely. Add a `LICENSE` file before pushing to GitHub.
+[MIT](./LICENSE) — reuse and adapt freely.
 
 ---
 

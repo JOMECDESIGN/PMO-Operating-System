@@ -1,0 +1,16 @@
+Task,Team,Start week,End week,Depends on,Critical path?,Milestone gate,Notes
+Styling trend study / N->3 sketches,Styling,W1,W5,,Yes,M1 (W5),">=1 direction client-confirmed in writing"
+Interface-contract freeze (G2),Software/Embedded,W2,W3,,No,,Cross-site F2 freeze; both-site sign-off required
+Mock service start (G1),Software,W1,W1,,No,,Hangzhou starts against Mock without waiting for hardware
+Styling 3->1 deepen & confirm,Styling,W6,W8,Styling trend study,Yes,M2 (W8),
+CAS / A-surface modeling,Styling/Demo-model,W8,W11,Styling 3->1 deepen & confirm,Yes,M3 (W11),F1 freeze point
+Frame design,Demo-model,W9,W12,CAS / A-surface modeling,Yes,,
+Frame build + QC buffer,Demo-model,W12,W14,Frame design,Yes,M4 (W14),Buffer W12-W14 absorbs design/QC slip before gate
+Body,Demo-model,W15,W18,Frame build + QC buffer,Yes,,
+Trim,Demo-model,W17,W19,Body,Yes,,Overlaps body; F1 change risk hits trim machining
+Client-screen adaptation,Embedded,W13,W20,Interface-contract freeze (G2),No,,Kunshan; prerequisite for Hangzhou screen-UI integration
+Screen-UI integration,Software,W15,W20,Client-screen adaptation,No,M5 (W20),Cross-site dependency
+Final assembly,Demo-model,W19,W22,Trim,Yes,,
+Real-hardware integration (G3),Software/Embedded,W22,W26,Final assembly; Screen-UI integration,Yes,,"Zero front/back-end code change = success, if contract was right"
+Pre-acceptance test,Test,W22,W26,Real-hardware integration (G3),Yes,M6 (W26),A 100% / B >=90% / stability 8h x3 zero A-faults
+Final acceptance,Test,W27,W30,Pre-acceptance test,Yes,M7 (W30),Shippable
