@@ -1,0 +1,45 @@
+flowchart LR
+    classDef jkt fill:#e3f2fd,stroke:#1565c0,stroke-width:1.5px,color:#0d47a1
+    classDef zk fill:#e8f5e9,stroke:#2e7d32,stroke-width:1.5px,color:#1b5e20
+    classDef fld fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1.5px,color:#4a148c
+    classDef safe fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+
+    subgraph MT["主驾控台（驾驶室）"]
+        VCU1["VCU-主(712)"]:::zk
+        ZH["协议转换盒 IGS-603B-S1"]:::zk
+        CJ["按键/电源采集 ICC-01CB-S1<br/>报警数采 ICC-01CB-S2<br/>串口解析 IGS-603B-S2"]:::zk
+        SW["8口交换机 + 5口交换机"]:::zk
+        PM1["双屏 15.6″×2 IDT-156S-S1"]:::jkt
+        SB1["712手柄 + 电子方向机"]:::jkt
+        JT1["一键急停旋钮"]:::safe
+        GD["双路供电 AC220V+DC24V<br/>开关电源/DCDC隔离/二极管/应急电源"]:::jkt
+    end
+
+    subgraph FT["副驾控台（飞桥·级联简配）"]
+        VCU2["VCU-副(712)"]:::zk
+        DC2["DC/DC 24→12 + 8位保险汇流排"]:::jkt
+        PM2["双屏×2（级联主台数据）"]:::jkt
+        SB2["712手柄 + 电子方向机"]:::jkt
+        JT2["一键急停旋钮"]:::safe
+    end
+
+    VCU1 <==>|"CAN 权限仲裁<br/>切换前双台手柄必须回空挡"| VCU2
+    MT -.->|"级联：1×CAN网线(双屏数据)<br/>+ 1×六类RJ45(视频数据)"| PM2
+
+    TJ["吊舱推进×2 (40kW, 0-330°)<br/>推进控制箱"]:::fld
+    DCB["直流配电板×2 / 电池控制箱×2<br/>(357kWh·2仓)"]:::fld
+    GG["惯导HI32 / 通用·火灾报警器<br/>七氟丙烷复视器 (RS485/232)"]:::fld
+    YW["液位×3(模拟量)<br/>舱底水高位×6(开关量)<br/>风机状态"]:::fld
+    SP["摄像头×5 + NVR + 边缘计算盒<br/>动态声呐 / 4G路由器"]:::fld
+    LD["毫米波雷达 CAR-A60 (CAN)"]:::fld
+    HJT["后甲板急停开关(扩展1-2路)"]:::safe
+
+    VCU1 <-->|"CAN：启停/故障/复位<br/>(常规操作·经VCU)"| TJ
+    JT1 & JT2 & HJT ==>|"硬接线串联·不经VCU<br/>任一触发→双推进急停"| TJ
+    DCB -->|"以太网(电池/直流板数据)<br/>电源/电池急停=硬接线"| SW
+    GG --> CJ
+    YW --> CJ
+    SP -->|以太网| SW
+    LD -->|CAN| PM1
+    SW --> PM1
+    CJ --> PM1

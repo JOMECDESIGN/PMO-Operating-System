@@ -1,0 +1,24 @@
+flowchart LR
+    classDef crit fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef norm fill:#e3f2fd,stroke:#1565c0,stroke-width:1.5px,color:#0d47a1
+    classDef gap fill:#fff3e0,stroke:#e65100,stroke-width:2px,stroke-dasharray:6 4,color:#bf360c
+    classDef ms fill:#fffde7,stroke:#f9a825,stroke-width:2px,color:#f57f17
+
+    QQ["T1.1 副台面板澄清<br/>T1.4 上行总线明确<br/>T1.5 手柄供电确认<br/>⚠️ 三条卡图·本周发澄清函"]:::gap
+    T014["T1.14 正式接线图+认可图<br/>甲方会签 → M1 详设冻结"]:::crit
+    P2["P2 采购/制造/软件<br/>T2.1长周期物料 ⚠️交期未识别<br/>T2.3主台配盘(关键路径)"]:::crit
+    P3["P3 FAT 工厂验收<br/>6项 → M2 出厂就绪"]:::crit
+    T48["T4.8 驾控台就位<br/>+ 机舱侧对接(712所配合)"]:::crit
+    P5["P5 HAT 系泊试验<br/>5项(含失效注入) → M4"]:::crit
+    P6["P6 SAT 航行试验+吊舱标定<br/>→ M5 → 稳定观察≥30天"]:::crit
+    P7["P7 交付<br/>五方签字 → M6"]:::ms
+
+    M0["M0 协议签署<br/>⚠️ 签字页空白"]:::gap
+    M0 --> QQ --> T014 --> P2 --> P3 --> T48 --> P5 --> P6 --> P7
+
+    T16["T1.6 线缆长度确认<br/>(船厂测量)"]:::norm
+    T41["T4.1 船厂线缆预铺<br/>不等FAT·尽早开工"]:::norm
+    T16 --> T41 -.->|"解耦：把船厂工序<br/>移出关键路径"| T48
+
+    KX["三个〔可选〕决策：网关/告警分级/健康评分<br/>截止=M1·逾期默认不实施并书面留痕"]:::gap
+    KX -.-> T014

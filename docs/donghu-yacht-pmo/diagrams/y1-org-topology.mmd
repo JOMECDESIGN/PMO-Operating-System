@@ -1,0 +1,29 @@
+flowchart TB
+    classDef party fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1.5px,color:#4a148c
+    classDef own fill:#e3f2fd,stroke:#1565c0,stroke-width:1.5px,color:#0d47a1
+    classDef zk fill:#e8f5e9,stroke:#2e7d32,stroke-width:1.5px,color:#1b5e20
+    classDef gap fill:#fff3e0,stroke:#e65100,stroke-width:2px,stroke-dasharray:6 4,color:#bf360c
+    classDef gate fill:#fffde7,stroke:#f9a825,stroke-width:2px,color:#f57f17
+
+    JF["甲方<br/>武船设计院 / 中南彭力<br/>(需求·审图会签·决策·验收)"]:::party
+    CD["船东<br/>(使用方·五方验收之一)"]:::party
+    CC["船厂<br/>(线缆预铺·外装安装·系泊配合)"]:::party
+
+    subgraph YF["乙方 · 浦立泽（供货与总集成责任主体）"]
+        ZC["智舱团队(杭州&昆山)<br/>【驾控台】台体/人机硬件/显控软件<br/>+ 总集成"]:::own
+        ZK["智控团队(外部)<br/>【智控】采控单元/传感/网络/执行接口"]:::zk
+        ZC <-->|"缝B 供货与软件边界<br/>显控软件 vs VCU软件归属<br/>⚠️ 显控屏归属两种口径(V2§1.4)"| ZK
+    end
+
+    S712["712所<br/>VCU(712)×2 + 712手柄 供货<br/>三电(推进/电池/直流板)接口<br/>机舱侧对接配合"]:::party
+
+    JF <==>|"缝A 甲乙主缝<br/>⚠️ 协议签字页空白(M0未达成)<br/>澄清函/认可图会签/可选项决策"| YF
+    YF <-->|"缝C 712协同界面<br/>VCU/手柄到货节点·三电CAN协议<br/>机舱对接条件 ⚠️ 未书面化/无排期"| S712
+    YF <-->|"缝D 船厂界面<br/>T4.1预铺(只依赖线缆规格T1.6)<br/>外装安装/踏勘/施工交底"| CC
+    ZC -.-|"缝E 杭州↔昆山两地协同<br/>⚠️ 分工与接口人待落名"| ZC
+
+    WF["五方验收 (T7.4)<br/>甲方 + 船东 + 船厂 + 设计院 + 设备商<br/>交付签字"]:::gate
+    JF --- WF
+    CD --- WF
+    CC --- WF
+    YF --- WF
