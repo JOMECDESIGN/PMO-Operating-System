@@ -7,8 +7,8 @@
 ## 已发布位置（单一事实来源）
 
 飞书 Wiki（挂在《驾控台及智控系统技术方案(V2·对标升级版)》节点下）：
-**《PMO管理方案：关注问题清单与下一步行动策略(V1.0)》**
-https://wu35s592xy.feishu.cn/wiki/N5j7wkVl3iZQBfkvGC8cTlBJnBh
+**《PMO管理方案：关注问题清单与下一步行动策略(V1.1·内部版)》**
+https://wu35s592xy.feishu.cn/wiki/IULVw9msZioy7CklZgycgc7pnpe
 
 **日常维护以飞书文档为准**；本目录为源文件归档，供重新生成/升版使用。
 
@@ -21,7 +21,7 @@ https://wu35s592xy.feishu.cn/wiki/N5j7wkVl3iZQBfkvGC8cTlBJnBh
 
 | 文件 | 说明 |
 |---|---|
-| `PMO管理方案-武汉东湖智能游艇-V1.0.docx` | 发布到飞书的原始 Word（导入飞书生成云文档） |
+| `PMO管理方案-武汉东湖智能游艇-V1.1.docx` | 发布到飞书的原始 Word（导入飞书生成云文档） |
 | `build_docx.py` | 文档生成脚本（python-docx），升版时改这里再重新生成 |
 | `diagrams/y1-org-topology.mmd` | 图1 组织协同拓扑（六方 + 缝A–E）Mermaid 源 |
 | `diagrams/y2-tech-topology.mmd` | 图2 系统技术拓扑（双台双VCU/四总线/安全通道）源 |
