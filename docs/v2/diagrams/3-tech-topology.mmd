@@ -1,0 +1,31 @@
+flowchart LR
+    classDef hz fill:#e3f2fd,stroke:#1565c0,stroke-width:1.5px,color:#0d47a1
+    classDef ks fill:#e8f5e9,stroke:#2e7d32,stroke-width:1.5px,color:#1b5e20
+    classDef ct fill:#fffde7,stroke:#f9a825,stroke-width:2px,color:#f57f17
+    classDef gap fill:#fff3e0,stroke:#e65100,stroke-width:2px,stroke-dasharray:6 4,color:#bf360c
+    classDef ext fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1.5px,color:#4a148c
+
+    subgraph HZ["杭州 · 软件域"]
+        UI["前端 UI<br/>React / 4屏+P-HUD/魔法屏"]:::hz
+        BE["后端<br/>状态机 / FastAPI"]:::hz
+        MOCK["Mock 服务<br/>(开发期硬件替身)"]:::hz
+    end
+
+    subgraph KS["昆山 · 硬件域"]
+        GW["硬件抽象网关<br/>CAN FD ↔ MQTT"]:::ks
+        HW["9大机构 / 传感器<br/>健康监测 / 屏体"]:::ks
+    end
+
+    UI <-->|"契约① WebSocket消息格式<br/>✅ F2范围·W2-3冻结"| BE
+    BE <-->|"契约② 场景触发API<br/>✅ F2范围"| GW
+    GW <-->|"契约④ CAN FD协议<br/>✅ F2范围"| HW
+    GW -->|"契约③ IO表<br/>✅ F2范围"| BE
+    MOCK -.->|"按契约③④模拟<br/>W22前替代真硬件"| BE
+
+    ZK["智控系统<br/>(外部团队)"]:::ext
+    SD["712所 · 三电<br/>整车供电 / UPS"]:::ext
+    JC["712所 · 机舱<br/>安装空间 / 走线 / 散热"]:::ext
+
+    ZK <-.->|"契约⑤ 智控↔智舱<br/>控制信号/数据交互/联动<br/>⚠️ 缺失·接入点未定"| BE
+    SD -.->|"契约⑥ 供电接口<br/>电压/功率/UPS边界(关联R07)<br/>⚠️ 缺失"| HW
+    JC -.->|"契约⑦ 安装/走线/散热边界<br/>(关联R03/R17)<br/>⚠️ 缺失"| HW
