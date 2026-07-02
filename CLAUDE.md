@@ -96,6 +96,7 @@ When a task touches one of these areas, open the matching doc **before** acting.
 | Area | Doc | Use when |
 |------|-----|----------|
 | How this whole system works / PMO role | `docs/framework.md` | First read; onboarding; team alignment |
+| Six execution principles P1–P6 (过程/以事找人/版本/量化/问题/采购) | `docs/principles.md` | Decomposing & assigning work; task fields; issue lists; procurement requests |
 | Client-supplied interface clearance (S1) | `docs/interface-sop.md` | Tracking/chasing client interface specs (15-working-day rule) |
 | Hangzhou ↔ Kunshan collaboration (S2) | `docs/two-site.md` | Aligning the two sites; freezing the interface contract |
 | Schedule baseline & critical path (S3) | `docs/gantt.md` | Viewing/maintaining the 30-week plan |

@@ -34,6 +34,7 @@ The design philosophy follows the broader Claude Code community consensus: a **s
 ├── README.md                  # This file
 ├── docs/
 │   ├── framework.md           # PMO role, knowledge, methods, Feishu tooling (the "how it all works")
+│   ├── principles.md          # Six execution principles (P1–P6): process, task→people, versioning, quantification, issues, procurement
 │   ├── interface-sop.md       # Seam S1: client-supplied interface clearance
 │   ├── two-site.md            # Seam S2: Hangzhou ↔ Kunshan dependency map + interface contract
 │   ├── gantt.md               # Seam S3: 30-week schedule baseline + critical path
@@ -41,9 +42,10 @@ The design philosophy follows the broader Claude Code community consensus: a **s
 │   ├── risk-register.md       # 17-risk register + weekly review cadence
 │   └── weekly-report.md       # Milestones M1–M7 + RAG weekly report template
 └── templates/
-    ├── interface-tracker.csv  # Import seed → Feishu Bitable
+    ├── interface-tracker.csv   # Import seed → Feishu Bitable
     ├── risk-register.csv       # Import seed → Feishu Bitable
-    └── milestone-tracker.csv   # Import seed → Feishu Bitable
+    ├── milestone-tracker.csv   # Import seed → Feishu Bitable
+    └── procurement-tracker.csv # Import seed → Feishu Bitable (principle P6)
 ```
 
 ---
